@@ -125,6 +125,7 @@ local base_buildpackagejob = {
   build_dir:: '',
   extra_repo:: '',
   extra_repo_owner:: '',
+  add_extra_tag:: true,
   secret_name:: '',
   spec_name:: '',
   test_suite:: '',
@@ -302,7 +303,16 @@ local buildpackagejob = base_buildpackagejob {
         commitish: '%s/.git/ref' % tl.package,
       },
     },
-  ],
+  ] + (if tl.extra_repo != '' && tl.add_extra_tag then [
+    {
+      put: '%s-tag' % tl.extra_repo,
+      params: {
+        name: 'package-version/version',
+        tag: 'package-versino/version',
+        commitish: '%s/.git/ref' % tl.extra_repo,
+      },
+    },
+  ] else []),
 
   // Publish success/failure metrics.
   on_success: publishresulttask {
@@ -2299,6 +2309,7 @@ local build_artifactplugins_yum = buildpackagejob {
       builds: ['goo'],
       extra_repo: 'googet',
       extra_repo_owner: 'google',
+      add_extra_tag: false,
       secret_name: 'googet',
       test_suite: 'packagevalidation|packageupgrade',
       abbr_name: 'ciw-googet',
@@ -2469,6 +2480,15 @@ local build_artifactplugins_yum = buildpackagejob {
         uri: 'https://github.com/GoogleCloudPlatform/google-guest-agent.git',
         branch: 'main',
         fetch_tags: false,
+      },
+    },
+    {
+      name: 'google-guest-agent-tag',
+      type: 'github-release',
+      source: {
+        uri: 'https://github.com/GoogleCloudPlatform/google-guest-agent.git',
+        branch: 'main',
+        fetch_tags: true,
       },
     },
     {
