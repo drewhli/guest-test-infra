@@ -308,7 +308,7 @@ local buildpackagejob = base_buildpackagejob {
       put: '%s-tag' % tl.extra_repo,
       params: {
         name: 'package-version/version',
-        tag: 'package-versino/version',
+        tag: 'package-version/version',
         commitish: '%s/.git/ref' % tl.extra_repo,
       },
     },
