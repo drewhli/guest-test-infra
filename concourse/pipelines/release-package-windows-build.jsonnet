@@ -386,7 +386,6 @@ local ImgGroup(name, images) = {
 // Start of output.
 {
   local windows_11_images = [
-    'windows-11-23h2-ent-x64',  // remove after Nov 10, 2026
     'windows-11-24h2-ent-x64',  // remove after Oct 12, 2027
     'windows-11-25h2-ent-x64',
   ],
@@ -454,7 +453,6 @@ local ImgGroup(name, images) = {
              ],
   jobs: [
           // Windows builds
-          ImgBuildJob('windows-11-23h2-ent-x64', 'win11-23h2-64', 'windows_gcs_updates_client11-23h2-64'),
           ImgBuildJob('windows-11-24h2-ent-x64', 'win11-24h2-64', 'windows_gcs_updates_client11-24h2-64'),
           ImgBuildJob('windows-11-25h2-ent-x64', 'win11-25h2-64', 'windows_gcs_updates_client11-25h2-64'),
           ImgBuildJob('windows-server-2025-dc', 'win2025-64', 'windows_gcs_updates_server2025'),
